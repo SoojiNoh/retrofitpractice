@@ -1,30 +1,30 @@
-var express = require('express'); 
+var express = require('express');
 var mysql =require('mysql');
 var router =express.Router();
 
 var connection =mysql.createConnection({
-    'host' : '',
-    'user' : '', 
-    'password' : '', 
-    'database' :'',
+    'host' : config.rds.host,
+    'user' : config.rds.user,
+    'password' : config.rds.password,
+    'database' : config.rds.database
 });
 
 router.get('/:content_id', function(req, res, next) {
     connection.query('select * from board where id=?;',[req.params.content_id], function (error, cursor){
-        if (cursor.length > 0) 
+        if (cursor.length > 0)
             res.json(cursor[0]);
         else
-            res.status(503).json({ 
+            res.status(503).json({
                 result : false, reason : "Cannot find selected article"
             });
     });
 });
 
-router.post('/', function(req, res, next){ 
+router.post('/', function(req, res, next){
     connection.query('insert into board(title, content) values (?, ?);', [req.body.title, req.body.content], function (error, info){
         if (error == null){
             connection.query('select * from board where id=?;', [info.insertId], function (error, cursor){
-                if (cursor.length > 0) { 
+                if (cursor.length > 0) {
                     res.json({
                         result : true, id : cursor[0].id, title : cursor[0].title, timestamp :cursor[0].timestamp,
                     });

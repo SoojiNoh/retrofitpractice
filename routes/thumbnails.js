@@ -4,10 +4,10 @@ var router =express.Router();
 
 
 var connection =mysql.createConnection({
-    'host' : '',
-    'user' : '',
-    'password' : '',
-    'database' :'',
+  'host' : config.rds.host,
+  'user' : config.rds.user,
+  'password' : config.rds.password,
+  'database' : config.rds.database
 });
 router.get('/', function(req, res, next) {
 	connection.query('select id, title, timestamp from board '+'order by timestamp desc;', function (error, cursor){

@@ -6,7 +6,7 @@ var connection =mysql.createConnection({
     'host' : config.rds.host,
     'user' : config.rds.user,
     'password' : config.rds.password,
-    'database' : config.rds.database
+    'database' : config.rds.retrofitpracticedatabase
 });
 
 router.get('/:content_id', function(req, res, next) {

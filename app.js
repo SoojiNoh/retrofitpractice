@@ -5,8 +5,20 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
+
+
+////////////////////////////
 var index = require('./routes/index');
 var users = require('./routes/users');
+
+var contents = require('./routes/contents');
+var thumbnails = require('./routes/thumbnails');
+//////////////////////////
+
+
+
+
 
 var app = express();
 
@@ -22,8 +34,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+
+
+
+////////////////////////////
 app.use('/', index);
 app.use('/users', users);
+app.use('/contents', contents);
+app.use('/thumbnails', thumbnails);
+///////////////////////////
+
+
+
+
 
 console.log('soojiweb start');
 

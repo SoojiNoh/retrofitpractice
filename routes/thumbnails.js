@@ -7,7 +7,7 @@ var connection =mysql.createConnection({
   'host' : config.rds.host,
   'user' : config.rds.user,
   'password' : config.rds.password,
-  'database' : config.rds.database
+  'database' : config.rds.retrofitpracticedatabase
 });
 router.get('/', function(req, res, next) {
 	connection.query('select id, title, timestamp from board '+'order by timestamp desc;', function (error, cursor){
